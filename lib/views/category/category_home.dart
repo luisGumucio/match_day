@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:match_day/models/category.dart';
 import 'package:match_day/services/category_service.dart';
 
+import 'category_create.dart';
 import 'category_list.dart';
 
 class CategoryHome extends StatefulWidget {
@@ -26,6 +27,21 @@ class _CategoryHomeState extends State<CategoryHome> {
               : const Center(child: CircularProgressIndicator());
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _goToCategroyPage,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
     );
+  }
+
+  _goToCategroyPage() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return CategoryCreate(refresh: _refresh);
+    }));
+  }
+
+  _refresh() {
+    setState(() {});
   }
 }

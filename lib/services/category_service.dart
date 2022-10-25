@@ -12,9 +12,16 @@ class CategoryService {
     return catogories;
   }
 
+  Future<Category> addCategory(Category category) async {
+    final body = category.toJson(category);
+    final result = await client.records.create(categoryIndex, body: body);
+    return Category.fromJson(result);
+  }
+
   List<Category> _decodeCategory(List<RecordModel> items) {
     return items.map((item) {
       return Category.fromJson(item);
     }).toList();
   }
+
 }

@@ -9,4 +9,11 @@ class Category {
   factory Category.fromJson(RecordModel item) {
     return Category(id: item.id, name: item.data['name'], teamTotal: item.data['teamTotal']);
   }
+
+  Map<String, dynamic> toJson(Category category) {
+    return <String, dynamic> {
+      'name': category.name,
+      'teamTotal': category.teamTotal
+    };
+  }
 }
