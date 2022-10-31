@@ -24,4 +24,12 @@ class CategoryService {
     }).toList();
   }
 
+  addTeamToCategory(Category category) async {
+    Category categoryUpdate = Category(
+        id: category.id,
+        name: category.name,
+        teamTotal: category.teamTotal + 1);
+    final body = category.toJson(categoryUpdate);
+    await client.records.update(categoryIndex, category.id, body: body);
+  }
 }
