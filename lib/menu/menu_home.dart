@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/menu_item_setting.dart';
 import '../views/category/category_home.dart';
+import '../views/competion/competion_home.dart';
 import '../views/team/team_home.dart';
 import 'pages/menu_item_card.dart';
 
@@ -19,9 +20,12 @@ class MenuHome extends StatefulWidget {
 class _MenuHomeState extends State<MenuHome> {
   final List<MenuItemCard> menuItemCards = [
     MenuItemCard(
+        menuItemSetting: MenuItemSetting(Icons.sports_golf_sharp, 'Torneos',
+            'Crear torneos', Colors.green, const CompetionHome())),
+    MenuItemCard(
         menuItemSetting: MenuItemSetting(
             Icons.category,
-            'Category',
+            'Categorias',
             'Crear categorias para equipos',
             Colors.purple,
             const CategoryHome())),

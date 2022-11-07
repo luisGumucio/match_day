@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:match_day/services/team_service.dart';
 import 'package:match_day/views/team/team_create.dart';
 

@@ -1,13 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:match_day/models/picture.dart';
 import 'package:match_day/services/category_service.dart';
 import 'package:match_day/services/picture_service.dart';
 import 'package:match_day/services/team_service.dart';
 import 'package:match_day/views/pages/camera_page.dart';
-import 'package:match_day/views/pages/other.dart';
-import 'package:path/path.dart';
 
 import '../../models/category.dart';
 import '../../models/team.dart';
@@ -158,7 +155,7 @@ class _TeamCreateState extends State<TeamCreate> {
           urlLogo: value.url,
         );
         team.category = category;
-        Team teamCreated = await teamService.addTeam(team);
+        await teamService.addTeam(team);
         await categoryService.addTeamToCategory(category);
         setState(() {
           circular = false;
