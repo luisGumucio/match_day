@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import '../../constant/grid_layout_constant.dart';
 import '../../models/competion.dart';
 import '../pages/grid_option.dart';

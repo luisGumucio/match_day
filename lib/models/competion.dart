@@ -12,7 +12,7 @@ class Competion {
   Competion(
       this.name, this.initDate, this.endDate, this.isStarted);
 
-  factory Competion.fromJson(RecordModel item) {;
+  factory Competion.fromJson(RecordModel item) {
     return Competion(
         item.data['name'],
         DateTime.parse(item.data['initDate']),

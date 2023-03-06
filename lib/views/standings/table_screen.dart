@@ -16,7 +16,6 @@ class TableScreen extends StatefulWidget {
 }
 
 class _TableScreenState extends State<TableScreen> {
-  late List _table = [];
   final StandingsService standingsService = StandingsService();
 
   @override

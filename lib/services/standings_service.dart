@@ -7,7 +7,7 @@ class StandingsService {
   static const standingsIndex = 'standings';
 
   Future<List<Standings>> getStadingsByCategory(String categoryId) async {
-    final result = await client.records.getList(standingsIndex, filter: 'categoryId = "$categoryId"');
+    final result = await client.collection(standingsIndex).getList(filter: 'categoryId = "$categoryId"');
     List<Standings> standings = _decodeStandings(result.items);
     return standings;
   }

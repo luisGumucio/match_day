@@ -10,7 +10,9 @@ class TeamBuilder implements Builder {
   List<Team> decode(List<RecordModel> item) {
     return item.map((data) {
       Team team = Team.fromJson(data);
-      team.category = Category.fromJsonExpand(data.expand['categoryId']);
+      for (var element in data.expand['categoryId']!) {
+        team.category = Category.fromJsonExpand(element.id, element.data);
+      }
       return team;
     }).toList();
   }

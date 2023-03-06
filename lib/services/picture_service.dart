@@ -12,7 +12,7 @@ class PictureService {
 
   Future<Picture> addPicture(File file) async {
     final fileName = basename(file.path);
-    final result = await client.records.create(pictureIndex, files: [
+    final result = await client.collection(pictureIndex).create(files: [
       http.MultipartFile.fromBytes(
         'image', // the name of the file field
         file.readAsBytesSync(),

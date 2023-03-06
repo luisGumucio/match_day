@@ -8,7 +8,7 @@ class CompetionService {
   final CompetionBuilder competionBuilder = CompetionBuilder();
 
   Future<List<Competion>> getAllCompetion({int page = 1}) async {
-    final result = await client.records.getList(competionIndex,
+    final result = await client.collection(competionIndex).getList(
     page: page, perPage: 20, sort: '-created', expand: 'categories');
 
     List<Competion> competions = competionBuilder.decode(result.items);
@@ -17,7 +17,7 @@ class CompetionService {
 
   Future<Competion> addCompetion(Competion competion) async {
     final body = competion.toJson(competion);
-    final result = await client.records.create(competionIndex, body: body);
+    final result = await client.collection(competionIndex).create(body: body);
     return Competion.fromJson(result);
   }
 }

@@ -17,7 +17,7 @@ class Category {
     };
   }
 
-  factory Category.fromJsonExpand(Map<String, dynamic> expand) {
-    return Category(id: expand['id'], name: expand['name'], teamTotal: expand['teamTotal']);
+  factory Category.fromJsonExpand(id, Map<String, dynamic> expand) {
+    return Category(id: id, name: expand['name'], teamTotal: expand['teamTotal']);
   }
 }

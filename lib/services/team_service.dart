@@ -7,7 +7,7 @@ class TeamService {
   final TeamBuilder teamBuilder = TeamBuilder();
 
   Future<List<Team>> getAllTeam({int page = 1}) async {
-    final result = await client.records.getList(teamIndex,
+    final result = await client.collection(teamIndex).getList(
         page: page, perPage: 20, sort: '-created', expand: 'categoryId');
 
     var teams = teamBuilder.decode(result.items);
@@ -17,7 +17,7 @@ class TeamService {
 
   Future<Team> addTeam(Team team) async {
     final body = team.toJson(team);
-    final result = await client.records.create(teamIndex, body: body);
+    final result = await client.collection(teamIndex).create(body: body);
 
     return Team.fromJson(result);
   }

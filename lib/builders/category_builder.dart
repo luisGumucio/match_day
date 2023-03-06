@@ -12,14 +12,10 @@ class CategoryBuilder implements Builder {
 
   List<Category> decodeFromExpand(Map<String, dynamic> item) {
     List categories = item['categories'];
-    List<Category> categorias = categories.map((data) {
-      try {
-        return Category.fromJsonExpand(data);
-      } catch (ex) {
-        print(ex);
-        throw ex;
-      }
-    }).toList();
-    return categorias;
+    List<Category> categoryList = [];
+    for (var category in categories) {
+      categoryList.add(Category.fromJsonExpand(category.id, category.data));
+    }
+    return categoryList;
   }
 }

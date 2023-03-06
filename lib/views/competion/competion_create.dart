@@ -7,7 +7,6 @@ import '../../constant/choice_constant.dart';
 import '../../models/category.dart';
 import '../../models/choice.dart';
 import '../../services/category_service.dart';
-import '../pages/choide_card.dart';
 import '../pages/team_select.dart';
 
 class CompetionCreate extends StatefulWidget {
@@ -269,21 +268,16 @@ class _CompetionCreateState extends State<CompetionCreate> {
         Step(
             state: currentStep > 0 ? StepState.complete : StepState.indexed,
             title: const Text('1'),
-            content: _getFormInformation(),
+            content: _getFormSports(),
             isActive: currentStep >= 0),
         Step(
             state: currentStep > 1 ? StepState.complete : StepState.indexed,
             title: const Text('2'),
-            content: _getFormCategory(),
+            content: _getFormInformation(),
             isActive: currentStep >= 1),
-        // Step(
-        //     state: currentStep > 2 ? StepState.complete : StepState.indexed,
-        //     title: const Text('3'),
-        //     content: _getFormSports(),
-        //     isActive: currentStep >= 2),
         Step(
             title: const Text('3'),
-            content: _getFormSports(),
+            content: _getFormCategory(),
             isActive: currentStep >= 2)
       ];
 }

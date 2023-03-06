@@ -3,5 +3,5 @@ class Config {
     'baseUrl',
     defaultValue: uri,
   );
-  static const uri = 'http://192.168.1.14:8090';
+  static const uri = 'http://192.168.1.15:8090';
 }

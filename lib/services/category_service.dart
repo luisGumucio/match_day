@@ -6,15 +6,15 @@ class CategoryService {
   static const categoryIndex = 'category';
 
   Future<List<Category>> getAllCategory({int page = 1}) async {
-    final result = await client.records
-        .getList(categoryIndex, page: page, perPage: 20, sort: '-created');
+    final result = await client.collection(categoryIndex)
+        .getList(page: page, perPage: 20, sort: '-created');
     List<Category> catogories = _decodeCategory(result.items);
     return catogories;
   }
 
   Future<Category> addCategory(Category category) async {
     final body = category.toJson(category);
-    final result = await client.records.create(categoryIndex, body: body);
+    final result = await client.collection(categoryIndex).create(body: body);
     return Category.fromJson(result);
   }
 
@@ -30,6 +30,6 @@ class CategoryService {
         name: category.name,
         teamTotal: category.teamTotal + 1);
     final body = category.toJson(categoryUpdate);
-    await client.records.update(categoryIndex, category.id, body: body);
+    await client.collection(categoryIndex).update(category.id, body: body);
   }
 }
