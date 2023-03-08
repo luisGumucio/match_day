@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:match_day/models/grid_layout.dart';
 import '../../constant/grid_layout_constant.dart';
 import '../../models/competion.dart';
 import '../pages/grid_option.dart';
@@ -31,18 +32,28 @@ class _CompetionDetailState extends State<CompetionDetail> {
               shrinkWrap: true,
               crossAxisSpacing: 5,
               mainAxisSpacing: 5,
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               maxCrossAxisExtent: 200,
               children: List.generate(
-                options.length,
-                (index) => GridOptions(
-                  layout: options[index],
-                ),
-              ),
+                  options.length,
+                  (index) => GestureDetector(
+                        child: GridOptions(
+                          layout: options[index],
+                        ),
+                        onTap: () {
+                           goToItemMenu(options[index]);
+                        },
+                      )),
             ),
           ),
         ],
       ),
     );
+  }
+
+  goToItemMenu(GridLayout option) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return option.page;
+    }));
   }
 }

@@ -14,13 +14,21 @@ class CompetionHome extends StatefulWidget {
 
 class _CompetionHomeState extends State<CompetionHome> {
   final CompetionService competionService = CompetionService();
+  Future<List<Competion>>? _competions;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _competions = competionService.getAllCompetion();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Torneos')),
       body: FutureBuilder<List<Competion>>(
-        future: competionService.getAllCompetion(),
+        future: _competions,
         builder: ((context, snapshot) {
           return snapshot.hasData
               ? CompetionList(
@@ -36,9 +44,19 @@ class _CompetionHomeState extends State<CompetionHome> {
     );
   }
 
-  _goToCompetionPage() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return const CompetionCreate();
+  _goToCompetionPage() async {
+    final newCompetition =
+        await Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return CompetionCreate();
     }));
+
+    if (newCompetition != null) {
+      setState(() {
+        _competions = _competions?.then((competitions) {
+          competitions.add(newCompetition);
+          return competitions;
+        });
+      });
+    }
   }
 }

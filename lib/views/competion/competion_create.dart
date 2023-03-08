@@ -23,7 +23,7 @@ class _CompetionCreateState extends State<CompetionCreate> {
   final endDate = TextEditingController();
   final CategoryService categoryService = CategoryService();
   final CompetionService _competionService = CompetionService();
-  late Category _categorySelected;
+  Category? _categorySelected;
 
   List<Category> categories = [];
   List<Category> categoriesSelected = [];
@@ -36,6 +36,7 @@ class _CompetionCreateState extends State<CompetionCreate> {
     categoryService.getAllCategory().then((value) {
       setState(() {
         categories = value;
+        _categorySelected = categories.first;
       });
     });
   }
@@ -61,9 +62,9 @@ class _CompetionCreateState extends State<CompetionCreate> {
                   DateFormat("MMM d, yyyy").parse(endDate.value.text),
                   false);
               competion.categories = categoriesSelected;
-              _competionService.addCompetion(competion).then((value) => {
-                 Navigator.of(context).pop()
-              }); 
+              _competionService
+                  .addCompetion(competion)
+                  .then((value) => {Navigator.of(context).pop(competion)});
             } else {
               setState(() {
                 currentStep += 1;
@@ -146,7 +147,7 @@ class _CompetionCreateState extends State<CompetionCreate> {
                 ),
                 onTap: () async {
                   DateTime? date = DateTime.now();
-                  FocusScope.of(context).requestFocus(new FocusNode());
+                  FocusScope.of(context).requestFocus(FocusNode());
 
                   date = await showDatePicker(
                       context: context,
@@ -185,8 +186,9 @@ class _CompetionCreateState extends State<CompetionCreate> {
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      categoriesSelected
-                          .add(_categorySelected);
+                      if (_categorySelected != null) {
+                        categoriesSelected.add(_categorySelected!);
+                      }
                     });
                   },
                   child: const Text("Agregar"))
@@ -202,7 +204,7 @@ class _CompetionCreateState extends State<CompetionCreate> {
                 color: Colors.blue[400],
                 child: Center(
                     child: Text(
-                  '${categoriesSelected[index]}',
+                  categoriesSelected[index].name,
                   style: const TextStyle(fontSize: 18),
                 )),
               );

@@ -21,4 +21,10 @@ class TeamService {
 
     return Team.fromJson(result);
   }
+
+  Future<List<Team>> getAllTeamByCategoryId(String categoryId, {int page = 1}) async {
+    final result = await client.collection(teamIndex).getList(page: page, perPage: 20, filter: 'categoryId = "$categoryId"', expand: 'categoryId');
+    var teams = teamBuilder.decode(result.items);
+    return teams;
+  }
 }

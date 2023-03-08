@@ -1,36 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../models/grid_layout.dart';
+import '../views/competion/competion_detail_menu/detail_category_team.dart';
+import '../views/standings/standings_home.dart';
 
 List<GridLayout> options = [
-  GridLayout(title: 'Home', icon: Icons.home),
-  GridLayout(title: 'Email', icon: Icons.email),
-  GridLayout(title: 'Alarm', icon: Icons.access_alarm),
-  GridLayout(title: 'Wallet', icon: Icons.account_balance_wallet),
-  GridLayout(title: 'Backup', icon: Icons.backup),
-  GridLayout(title: 'Book', icon: Icons.book),
-  GridLayout(title: 'Camera', icon: Icons.camera_alt_rounded),
-  GridLayout(title: 'Person', icon: Icons.person),
-  GridLayout(title: 'Print', icon: Icons.print),
-  GridLayout(title: 'Phone', icon: Icons.phone),
-  GridLayout(title: 'Notes', icon: Icons.speaker_notes),
-  GridLayout(title: 'Music', icon: Icons.music_note_rounded),
-  GridLayout(title: 'Car', icon: Icons.directions_car),
-  GridLayout(title: 'Bicycle', icon: Icons.directions_bike),
-  GridLayout(title: 'Boat', icon: Icons.directions_boat),
-  GridLayout(title: 'Bus', icon: Icons.directions_bus),
-  GridLayout(title: 'Train', icon: Icons.directions_railway),
-  GridLayout(title: 'Walk', icon: Icons.directions_walk),
-  GridLayout(title: 'Contact', icon: Icons.contact_mail),
-  GridLayout(title: 'Duo', icon: Icons.duo),
-  GridLayout(title: 'Hour', icon: Icons.hourglass_bottom),
-  GridLayout(title: 'Mobile', icon: Icons.mobile_friendly),
-  GridLayout(title: 'Message', icon: Icons.message),
-  GridLayout(title: 'Key', icon: Icons.vpn_key),
-  GridLayout(title: 'Wifi', icon: Icons.wifi),
-  GridLayout(title: 'Bluetooth', icon: Icons.bluetooth),
-  GridLayout(title: 'Smile', icon: Icons.sentiment_satisfied),
-  GridLayout(title: 'QR', icon: Icons.qr_code),
-  GridLayout(title: 'ADD', icon: Icons.add_box),
-  GridLayout(title: 'Link', icon: Icons.link),
+  GridLayout(title: 'Equipos', icon: Icons.shield, page: const DetailCategoryTeam(title:'Equipos')),
+  GridLayout(title: 'Tabla', icon: Icons.table_chart_outlined, page: const StandingsHome()),
+  GridLayout(title: 'Sanciones', icon: Icons.disabled_visible_outlined, page: const DetailCategoryTeam(title:'Sanciones')),
+  GridLayout(title: 'Score', icon: Icons.calendar_month, page: const DetailCategoryTeam(title:'Score')),
 ];
