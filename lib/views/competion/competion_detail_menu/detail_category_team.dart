@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:match_day/models/competion.dart';
 
 import '../../../models/team.dart';
 import '../../../services/team_service.dart';
@@ -6,8 +7,8 @@ import '../../category/category_list_horizontal.dart';
 import '../../team/team_list.dart';
 
 class DetailCategoryTeam extends StatefulWidget {
-  final String title;
-  const DetailCategoryTeam({super.key, required this.title});
+  final Competion? competion;
+  const DetailCategoryTeam({super.key, this.competion});
 
   @override
   State<DetailCategoryTeam> createState() => _DetailCategoryTeamState();
@@ -20,13 +21,14 @@ class _DetailCategoryTeamState extends State<DetailCategoryTeam> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(title: Text(widget.competion!.name)),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         child: Column(
           children: <Widget>[
             buildAppBar(),
             CategoryListHorizontal(
+              categories: widget.competion!.categories,
                 onCategorySelected: _handleCategorySelection),
                       Expanded(
               child: _categoryTeams())

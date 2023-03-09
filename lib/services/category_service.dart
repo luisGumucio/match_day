@@ -32,4 +32,11 @@ class CategoryService {
     final body = category.toJson(categoryUpdate);
     await client.collection(categoryIndex).update(category.id, body: body);
   }
+
+  Future<List<Category>> getAllCategoryByCompetion(String compentionId, {int page = 1}) async {
+        final result = await client.collection("competions")
+        .getList(page: page, perPage: 20, filter: 'id = "$compentionId"');
+    List<Category> catogories = _decodeCategory(result.items);
+    return catogories;
+  }
 }

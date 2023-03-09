@@ -57,6 +57,7 @@ class _CompetionCreateState extends State<CompetionCreate> {
 
             if (isLastStep) {
               Competion competion = Competion(
+                "",
                   name.value.text,
                   DateFormat("MMM d, yyyy").parse(initDate.text),
                   DateFormat("MMM d, yyyy").parse(endDate.value.text),

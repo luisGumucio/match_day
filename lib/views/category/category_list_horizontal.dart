@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
 
 import '../../models/category.dart';
-import '../../services/category_service.dart';
 
 class CategoryListHorizontal extends StatefulWidget {
   final Function(String) onCategorySelected;
-  const CategoryListHorizontal({super.key, required this.onCategorySelected});
+  final List<Category> categories;
+  const CategoryListHorizontal({super.key, required this.onCategorySelected,
+  required this.categories});
 
   @override
   State<CategoryListHorizontal> createState() => _CategoryListHorizontalState();
 }
 
-class _CategoryListHorizontalState extends State<CategoryListHorizontal> {
-  final CategoryService _categoryService = CategoryService();
+class _CategoryListHorizontalState extends State<CategoryListHorizontal> {  
   String categoryId = "";
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Category>>(
-      future: _categoryService.getAllCategory(),
-      builder: ((context, snapshot) {
-        if (!snapshot.hasData) return const CircularProgressIndicator();
-        return SizedBox(
+    return SizedBox(
           height: 50,
           child: ListView(
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
-            children: snapshot.data!.map((doc) {
+            children: widget.categories.map((doc) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ChoiceChip(
@@ -52,7 +48,5 @@ class _CategoryListHorizontalState extends State<CategoryListHorizontal> {
             }).toList(),
           ),
         );
-      }),
-    );
   }
 }

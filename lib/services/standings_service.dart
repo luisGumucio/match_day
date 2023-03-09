@@ -18,4 +18,10 @@ class StandingsService {
     }).toList();
   }
 
+  Future<List<Standings>> getStadingsByCompetionAndCategory(String compentionId, String categoryId) async {
+        final result = await client.collection(standingsIndex).getList(filter: 'categoryId = "$categoryId" && competionId = "$compentionId"');
+    List<Standings> standings = _decodeStandings(result.items);
+    return standings;
+  }
+
 }

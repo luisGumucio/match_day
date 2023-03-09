@@ -20,7 +20,7 @@ class CompetionItem extends StatelessWidget {
           color: Colors.white,
           child: ListTile(
             title: Text(competion.name),
-            subtitle: Text('${initDate} - ${endDate}'),
+            subtitle: Text('$initDate - $endDate'),
             leading: CircleAvatar(
               backgroundColor: Colors.purple,
               child: Text(competion.name[0].toUpperCase()),

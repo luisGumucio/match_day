@@ -20,4 +20,20 @@ class CompetionService {
     final result = await client.collection(competionIndex).create(body: body);
     return Competion.fromJson(result);
   }
+
+  Future<List<Competion>> getCompetionById(String compentionId, {int page = 1}) async {
+    final result = await client.collection(competionIndex).getList(
+    page: page, perPage: 20, sort: '-created', expand: 'categories', filter: 'id = "$compentionId"');
+
+    List<Competion> competions = competionBuilder.decode(result.items);
+    return competions;
+  }
+
+  Future<List<Competion>> getAllCompetionActive({int page = 0}) async {
+    final result = await client.collection(competionIndex).getList(
+    page: page, perPage: 20, sort: '-created', expand: 'categories', filter: 'isStarted = true');
+
+    List<Competion> competions = competionBuilder.decode(result.items);
+    return competions;
+  }
 }

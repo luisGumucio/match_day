@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:match_day/models/competion.dart';
 import '../category/category_list_horizontal.dart';
+import '../competion/competion_list_horizontal.dart';
 import 'table_screen.dart';
 
 class StandingsHome extends StatefulWidget {
@@ -11,6 +13,7 @@ class StandingsHome extends StatefulWidget {
 
 class _StandingsHomeState extends State<StandingsHome> {
   String categoryId = "";
+  Competion compention = Competion('', '', DateTime.now(), DateTime.now(), false);
 
   @override
   Widget build(BuildContext context) {
@@ -18,25 +21,41 @@ class _StandingsHomeState extends State<StandingsHome> {
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       child: Column(
         children: <Widget>[
-          buildAppBar(),
-          CategoryListHorizontal(onCategorySelected: _handleCategorySelection),
+          buildAppBar('Competiciones'),
+          CompetitionListHorizontal(onCompetionSelected: _handleCompetionSelection),
+          buildAppBar('Categorias'),
+          _displayCategory(),
           Expanded(
               child: TableScreen(
             categoryId: categoryId,
+            compentionId: compention.id!
           ))
         ],
       ),
     );
   }
 
-  Widget buildAppBar() {
-    return const Text('Categorias',
-        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold));
+  Widget buildAppBar(title) {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(title,
+        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+    );
+  }
+  Widget _displayCategory() {
+    return compention.id == ''
+        ? const Center(child: Text("No hay Categoria seleccionada!"))
+        : CategoryListHorizontal(categories: compention.categories, onCategorySelected: _handleCategorySelection);
   }
 
   void _handleCategorySelection(String newCategoryId) {
     setState(() {
       categoryId = newCategoryId;
+    });
+  }
+  void _handleCompetionSelection(Competion newCompetion) {
+    setState(() {
+      compention = newCompetion;
     });
   }
 }

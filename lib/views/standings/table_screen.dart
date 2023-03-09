@@ -6,9 +6,10 @@ import '../../services/standings_service.dart';
 
 class TableScreen extends StatefulWidget {
   final String categoryId;
+  final String compentionId;
   const TableScreen({
     Key? key,
-    required this.categoryId,
+    required this.categoryId, required this.compentionId,
   }) : super(key: key);
 
   @override
@@ -96,7 +97,7 @@ class _TableScreenState extends State<TableScreen> {
             height: 10,
           ),
           FutureBuilder<List<Standings>?>(
-            future: standingsService.getStadingsByCategory(widget.categoryId),
+            future: standingsService.getStadingsByCompetionAndCategory(widget.compentionId, widget.categoryId),
             builder: ((context, snapshot) {
               if (!snapshot.hasData) {
                 return const Center(

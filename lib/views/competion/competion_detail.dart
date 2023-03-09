@@ -3,6 +3,7 @@ import 'package:match_day/models/grid_layout.dart';
 import '../../constant/grid_layout_constant.dart';
 import '../../models/competion.dart';
 import '../pages/grid_option.dart';
+import 'competion_detail_menu/detail_category_team.dart';
 
 class CompetionDetail extends StatefulWidget {
   final Competion competion;
@@ -41,7 +42,7 @@ class _CompetionDetailState extends State<CompetionDetail> {
                           layout: options[index],
                         ),
                         onTap: () {
-                           goToItemMenu(options[index]);
+                           goToItemMenu(options[index], widget.competion);
                         },
                       )),
             ),
@@ -51,9 +52,14 @@ class _CompetionDetailState extends State<CompetionDetail> {
     );
   }
 
-  goToItemMenu(GridLayout option) {
+  goToItemMenu(GridLayout option, Competion competion) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
+      if (option.page is DetailCategoryTeam) {
+        DetailCategoryTeam detail = DetailCategoryTeam(competion: competion);
+        return detail;
+      } else {
       return option.page;
+      }
     }));
   }
 }

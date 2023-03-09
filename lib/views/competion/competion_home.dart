@@ -18,7 +18,6 @@ class _CompetionHomeState extends State<CompetionHome> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _competions = competionService.getAllCompetion();
   }
