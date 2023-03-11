@@ -53,6 +53,6 @@ class _CompetitionListHorizontalState extends State<CompetitionListHorizontal> {
           ),
         );
       }),
-    );;
+    );
   }
 }
