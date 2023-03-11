@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductHome extends StatefulWidget {
-  static Color backgroundColor = Color(0xFF7C9A9A);
-  static Color highlightColor = Color(0xFF8CA7A2);
-  static Color unselectedColor = Color(0xFF68837E);
-  static Color accentColor = Color(0xFFDABBA7);
-  static Color textDarkColor = Color(0xFF5E5E5E);
-  static Color textLightColor = Color(0xFFC4C4C4);
+  static Color backgroundColor = const Color(0xFF7C9A9A);
+  static Color highlightColor = const Color(0xFF8CA7A2);
+  static Color unselectedColor = const Color(0xFF68837E);
+  static Color accentColor = const Color(0xFFDABBA7);
+  static Color textDarkColor = const Color(0xFF5E5E5E);
+  static Color textLightColor = const Color(0xFFC4C4C4);
   const ProductHome({Key? key}) : super(key: key);
 
   @override
@@ -17,17 +17,27 @@ class ProductHome extends StatefulWidget {
 class _ProductHomeState extends State<ProductHome> {
   List<String> categories = ["All", "Shoes", "Cars", "Food", "Pets", "Drinks"];
   List<ShoppingModel> products = [
-    ShoppingModel("Ninjas club", "Cars", 50.00,
-        const AssetImage("assets/images/polera2.png"), "Sublimada", "Practical"),
+    ShoppingModel(
+        "Ninjas club",
+        "Cars",
+        50.00,
+        const AssetImage("assets/images/polera2.png"),
+        "Sublimada",
+        "Practical"),
     ShoppingModel("Medikal", "Cars", 80.99,
         const AssetImage("assets/images/polera1.png"), "Economica", "Spacious"),
-    ShoppingModel("Nike", "Shoes", 100.99,
-        const AssetImage("assets/images/polera3.png"), "Confortable", "Sportsy"),
+    ShoppingModel(
+        "Nike",
+        "Shoes",
+        100.99,
+        const AssetImage("assets/images/polera3.png"),
+        "Confortable",
+        "Sportsy"),
     ShoppingModel("Nike Air", "Shoes", 349.99,
         const AssetImage("assets/images/polera1.png"), "Modern", "Popular"),
-     ShoppingModel("Peugeot 308", "Cars", 16499.99,
+    ShoppingModel("Peugeot 308", "Cars", 16499.99,
         const AssetImage("assets/images/polera3.png"), "Luxerious", "Fast"),
-     ShoppingModel("Timberland", "Shoes", 249.99,
+    ShoppingModel("Timberland", "Shoes", 249.99,
         const AssetImage("assets/images/polera2.png"), "Robust", "Stylish"),
   ];
   int selectedCategories = 0;
@@ -44,30 +54,28 @@ class _ProductHomeState extends State<ProductHome> {
         backgroundColor: ProductHome.backgroundColor,
         elevation: 0,
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            const SizedBox(
-              height: 20,
+      body: Column(
+        children: <Widget>[
+          const SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: Stack(
+              children: <Widget>[
+                ListView.separated(
+                    separatorBuilder: (context, index) => Divider(
+                          height: getDividerHeight(index),
+                          color: Colors.transparent,
+                        ),
+                    padding: const EdgeInsets.fromLTRB(5, 8, 5, 8),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return getProductCard(index);
+                    })
+              ],
             ),
-            Expanded(
-              child: Stack(
-                children: <Widget>[
-                  ListView.separated(
-                      separatorBuilder: (context, index) => Divider(
-                            height: getDividerHeight(index),
-                            color: Colors.transparent,
-                          ),
-                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-                      itemCount: products.length,
-                      itemBuilder: (context, index) {
-                        return getProductCard(index);
-                      })
-                ],
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
@@ -77,42 +85,45 @@ class _ProductHomeState extends State<ProductHome> {
     if (selectedCategories != 0) {
       if (products[index].tag == categories[selectedCategories]) {
         if (searchedProduct == "") {
-          return ShoppingCard(products[index]);
+          return ShoppingCard(product: products[index]);
         } else {
           if (products[index]
               .title
               .toLowerCase()
               .contains(searchedProduct.toLowerCase())) {
-            return ShoppingCard(products[index]);
+            return ShoppingCard(product: products[index]);
           } else {
             return const SizedBox();
           }
         }
-      } else
-        return SizedBox();
+      } else {
+        return const SizedBox();
+      }
     } else {
       if (searchedProduct == "") {
-        return ShoppingCard(products[index]);
+        return ShoppingCard(product: products[index]);
       } else {
         if (products[index]
             .title
             .toLowerCase()
-            .contains(searchedProduct.toLowerCase()))
-          return ShoppingCard(products[index]);
-        else
-          return SizedBox();
+            .contains(searchedProduct.toLowerCase())) {
+          return ShoppingCard(product: products[index]);
+        } else {
+          return const SizedBox();
+        }
       }
     }
   }
 
   double getDividerHeight(int index) {
-    if (selectedCategories == 0)
+    if (selectedCategories == 0) {
       return 5;
-    else {
-      if (products[index].tag == categories[selectedCategories])
+    } else {
+      if (products[index].tag == categories[selectedCategories]) {
         return 5;
-      else
+      } else {
         return 0;
+      }
     }
   }
 }
@@ -129,31 +140,34 @@ class ShoppingModel {
 }
 
 class ShoppingCard extends StatelessWidget {
-  ShoppingModel product;
+  final ShoppingModel product;
 
-  ShoppingCard(this.product);
+  const ShoppingCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            CupertinoPageRoute(builder: (context) => ProductDetails(product)));
+        Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (context) => ProductDetails(product: product)));
       },
       child: Stack(
         children: <Widget>[
           Positioned.fill(
             child: Card(
-              margin: const EdgeInsets.only(top: 5, bottom: 5, left: 5),
+              margin:
+                  const EdgeInsets.only(top: 5, bottom: 5, left: 5, right: 3),
               color: ProductHome.accentColor,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5)),
+                  borderRadius: BorderRadius.circular(2)),
             ),
           ),
           Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
             semanticContainer: true,
-            elevation: 2,
+            elevation: 1,
             color: Colors.white,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -163,7 +177,7 @@ class ShoppingCard extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 16),
+                    padding: const EdgeInsets.only(left: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -192,7 +206,7 @@ class ShoppingCard extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          "${product.price}\Bs",
+                          "${product.price} Bs",
                           style: TextStyle(
                               color: ProductHome.accentColor,
                               fontWeight: FontWeight.bold,
@@ -231,12 +245,12 @@ class ShoppingCard extends StatelessWidget {
 }
 
 class ProductDetails extends StatefulWidget {
-  ShoppingModel product;
+  final ShoppingModel product;
 
-  ProductDetails(this.product);
+  const ProductDetails({super.key, required this.product});
 
   @override
-  _ProductDetailsState createState() => _ProductDetailsState();
+  State<ProductDetails> createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
@@ -246,9 +260,9 @@ class _ProductDetailsState extends State<ProductDetails> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: ProductHome.accentColor,
-        actions: <Widget>[
+        actions: const [
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             child: Icon(
               Icons.bookmark_border,
               size: 30,
@@ -280,7 +294,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
+                      children: const <Widget>[
                         Expanded(
                           flex: 5,
                           child: Card(
@@ -302,6 +316,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                           child: Card(
                             color: Colors.white,
                             elevation: 10,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(26)),
+                            margin: const EdgeInsets.fromLTRB(32, 8, 32, 8),
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                               child: Row(
@@ -336,9 +353,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 ],
                               ),
                             ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(26)),
-                            margin: EdgeInsets.fromLTRB(32, 8, 32, 8),
                           ),
                         ),
                         Expanded(
@@ -360,7 +374,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 child: Text(
                                   "${widget.product.info1}\n${widget.product.info2}",
                                   softWrap: true,
-                                  style: TextStyle(fontSize: 18),
+                                  style: const TextStyle(fontSize: 18),
                                 ),
                               ),
                               Text(

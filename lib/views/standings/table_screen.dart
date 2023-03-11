@@ -13,7 +13,7 @@ class TableScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TableScreenState createState() => _TableScreenState();
+  State<TableScreen> createState() => _TableScreenState();
 }
 
 class _TableScreenState extends State<TableScreen> {

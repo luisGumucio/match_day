@@ -131,7 +131,7 @@ class _CompetionCreateState extends State<CompetionCreate> {
                 ),
                 onTap: () async {
                   DateTime? date = DateTime.now();
-                  FocusScope.of(context).requestFocus(new FocusNode());
+                  FocusScope.of(context).requestFocus(FocusNode());
 
                   date = await showDatePicker(
                       context: context,

@@ -52,7 +52,7 @@ class _CategoryCreateState extends State<CategoryCreate> {
                       child: ElevatedButton(
                         onPressed: _saveCategory,
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.greenAccent,
+                          backgroundColor: Colors.greenAccent,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)),
                         ),

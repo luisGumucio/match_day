@@ -46,7 +46,7 @@ class _CompetionHomeState extends State<CompetionHome> {
   _goToCompetionPage() async {
     final newCompetition =
         await Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return CompetionCreate();
+      return const CompetionCreate();
     }));
 
     if (newCompetition != null) {

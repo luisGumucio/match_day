@@ -19,7 +19,7 @@ class PictureService {
         filename: fileName,
       ),
     ]);
-    String url = '${Config.uri}/api/files/${result.collectionId}/${result.id}/' + result.data['image'];
+    String url = '${Config.uri}/api/files/${result.collectionId}/${result.id}/${result.data['image']}';
     return Picture(url: url);
   }
 }

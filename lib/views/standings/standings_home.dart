@@ -17,20 +17,22 @@ class _StandingsHomeState extends State<StandingsHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-      child: Column(
-        children: <Widget>[
-          buildAppBar('Competiciones'),
-          CompetitionListHorizontal(onCompetionSelected: _handleCompetionSelection),
-          buildAppBar('Categorias'),
-          _displayCategory(),
-          Expanded(
-              child: TableScreen(
-            categoryId: categoryId,
-            compentionId: compention.id!
-          ))
-        ],
+    return Material(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+        child: Column(
+          children: <Widget>[
+            buildAppBar('Competiciones'),
+            CompetitionListHorizontal(onCompetionSelected: _handleCompetionSelection),
+            buildAppBar('Categorias'),
+            _displayCategory(),
+            Expanded(
+                child: TableScreen(
+              categoryId: categoryId,
+              compentionId: compention.id!
+            ))
+          ],
+        ),
       ),
     );
   }

@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../models/choice.dart';
 
-class ChoiceCard extends StatefulWidget {
+class ChoiceCard extends StatelessWidget {
   final Choice choice;
-  late Color? color;
-  ChoiceCard({super.key, required this.choice, required this.color});
+  final Color color;
+  const ChoiceCard({super.key, required this.choice, required this.color});
 
-  @override
-  State<ChoiceCard> createState() => _ChoiceCardState();
-}
-
-class _ChoiceCardState extends State<ChoiceCard> {
-  var color = Colors.white;
   @override
   Widget build(BuildContext context) {
     return  Card(
@@ -23,10 +17,10 @@ class _ChoiceCardState extends State<ChoiceCard> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                    child: Icon(widget.choice.icon,
+                    child: Icon(choice.icon,
                         size: 90.0, color: Colors.black)),
-                Text(widget.choice.title,
-                    style: TextStyle(color: Colors.black)),
+                Text(choice.title,
+                    style: const TextStyle(color: Colors.black)),
               ]),
         ),
     );

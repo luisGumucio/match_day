@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:match_day/views/category/category_home.dart';
 import 'package:match_day/views/product/product_home.dart';
 
 import '../menu/menu_home.dart';
+import 'matchs/matchs_home.dart';
 import 'standings/standings_home.dart';
 
 class Home extends StatefulWidget {
@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _widgets = [
     const ProductHome(),
     const StandingsHome(),
-    const CategoryHome(),
+    const MatchsHome(),
     
   ];
 

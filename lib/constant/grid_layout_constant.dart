@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../models/grid_layout.dart';
-import '../views/competion/competion_detail_menu/detail_category_team.dart';
-import '../views/standings/standings_home.dart';
 
 List<GridLayout> options = [
-  GridLayout(title: 'Equipos', icon: Icons.shield, page: const DetailCategoryTeam()),
-  GridLayout(title: 'Tabla', icon: Icons.table_chart_outlined, page: const StandingsHome()),
-  GridLayout(title: 'Sanciones', icon: Icons.disabled_visible_outlined, page: Container()),
-  GridLayout(title: 'Score', icon: Icons.calendar_month, page: Container()),
+  GridLayout(title: 'Equipos', icon: Icons.shield),
+  GridLayout(title: 'Tabla', icon: Icons.table_chart_outlined),
+  GridLayout(title: 'Sanciones', icon: Icons.disabled_visible_outlined),
+  GridLayout(title: 'Score', icon: Icons.calendar_month),
 ];
