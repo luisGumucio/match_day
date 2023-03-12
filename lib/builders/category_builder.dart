@@ -10,6 +10,7 @@ class CategoryBuilder implements Builder {
   }
 
   List<Category> decodeFromExpand(Map<String, dynamic> item) {
+    if (item.isEmpty) return [];
     List categories = item['categories'];
     List<Category> categoryList = [];
     for (var category in categories) {

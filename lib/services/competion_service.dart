@@ -36,4 +36,9 @@ class CompetionService {
     List<Competion> competions = competionBuilder.decode(result.items);
     return competions;
   }
+
+  void updateCompetion(Competion competion) async {
+    final body = competion.toJson(competion);
+    await client.collection(competionIndex).update(competion.id!, body: body);
+  }
 }

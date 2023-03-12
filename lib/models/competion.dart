@@ -28,8 +28,7 @@ class Competion {
       'name': competion.name,
       'initDate': competion.initDate.toString(),
       'endDate': competion.endDate.toString(),
-      'isStarted': competion.isStarted,
-      'categories': competion.categories.map((e) { return e.id;}).toList()
+      'isStarted': competion.isStarted
     };
   }
 

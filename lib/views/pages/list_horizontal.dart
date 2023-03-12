@@ -1,20 +1,17 @@
+
 import 'package:flutter/material.dart';
 
-import '../../models/category.dart';
-
-class CategoryListHorizontal extends StatefulWidget {
-  final Function(String) onCategorySelected;
-  final List<Category> categories;
-  const CategoryListHorizontal({super.key, required this.onCategorySelected,
-  required this.categories});
+class ListHorizontal extends StatefulWidget {
+  final List dataList;
+  final Function(dynamic) onSelected;
+  const ListHorizontal({super.key, required this.dataList, required this.onSelected});
 
   @override
-  State<CategoryListHorizontal> createState() => _CategoryListHorizontalState();
+  State<ListHorizontal> createState() => _ListHorizontalState();
 }
 
-class _CategoryListHorizontalState extends State<CategoryListHorizontal> {  
-  String categoryId = "";
-
+class _ListHorizontalState extends State<ListHorizontal> {
+  Object? data;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -22,26 +19,25 @@ class _CategoryListHorizontalState extends State<CategoryListHorizontal> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
-            children: widget.categories.map((doc) {
+            children: widget.dataList.map((doc) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ChoiceChip(
                     selectedColor: const Color.fromRGBO(255, 204, 0, 1),
                     labelStyle: TextStyle(
                         color:
-                            categoryId == doc.id ? Colors.white : Colors.black),
+                            data == doc ? Colors.white : Colors.black),
                     label: Text(
                       doc.name,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    selected: categoryId == doc.id,
+                    selected: data == doc,
                     onSelected: (selected) {
                       if (selected) {
                         setState(() {
-                          categoryId = doc.id;
-                         widget.onCategorySelected(doc.id);
+                          data = doc;
+                         widget.onSelected(doc);
                         });
-                         
                       }
                     }),
               );

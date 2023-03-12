@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:match_day/views/pages/list_horizontal.dart';
 
 import '../../../models/competion.dart';
-import '../../category/category_list_horizontal.dart';
 import '../../standings/table_screen.dart';
 
 class DetailStadings extends StatefulWidget {
@@ -39,9 +39,9 @@ class _DetailStadingsState extends State<DetailStadings> {
   Widget _displayCategory() {
     return widget.competition.id == ""
         ? const Center(child: Text("No hay Categoria seleccionada!"))
-        : CategoryListHorizontal(
-            categories: widget.competition.categories,
-            onCategorySelected: _handleCategorySelection);
+        : ListHorizontal(
+            dataList: widget.competition.categories,
+            onSelected: _handleCategorySelection);
   }
 
   Widget buildAppBar(title) {
@@ -52,7 +52,7 @@ class _DetailStadingsState extends State<DetailStadings> {
     );
   }
 
-  void _handleCategorySelection(String newCategoryId) {
+  void _handleCategorySelection(newCategoryId) {
     setState(() {
       categoryId = newCategoryId;
     });

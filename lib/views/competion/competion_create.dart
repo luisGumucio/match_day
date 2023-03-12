@@ -4,11 +4,7 @@ import 'package:match_day/models/competion.dart';
 import 'package:match_day/services/competion_service.dart';
 
 import '../../constant/choice_constant.dart';
-import '../../models/category.dart';
 import '../../models/choice.dart';
-import '../../services/category_service.dart';
-import '../pages/team_select.dart';
-
 class CompetionCreate extends StatefulWidget {
   const CompetionCreate({super.key});
 
@@ -21,25 +17,10 @@ class _CompetionCreateState extends State<CompetionCreate> {
   final name = TextEditingController();
   final initDate = TextEditingController();
   final endDate = TextEditingController();
-  final CategoryService categoryService = CategoryService();
   final CompetionService _competionService = CompetionService();
-  Category? _categorySelected;
 
-  List<Category> categories = [];
-  List<Category> categoriesSelected = [];
   Color color = Colors.white;
   Choice? selectedCard;
-
-  @override
-  void initState() {
-    super.initState();
-    categoryService.getAllCategory().then((value) {
-      setState(() {
-        categories = value;
-        _categorySelected = categories.first;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +43,6 @@ class _CompetionCreateState extends State<CompetionCreate> {
                   DateFormat("MMM d, yyyy").parse(initDate.text),
                   DateFormat("MMM d, yyyy").parse(endDate.value.text),
                   false);
-              competion.categories = categoriesSelected;
               _competionService
                   .addCompetion(competion)
                   .then((value) => {Navigator.of(context).pop(competion)});
@@ -165,70 +145,6 @@ class _CompetionCreateState extends State<CompetionCreate> {
     );
   }
 
-  Widget _getFormCategory() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Text('Agrege las categorias',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 10),
-          _getCategory(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      categoriesSelected.clear();
-                    });
-                  },
-                  child: const Text("limpiar")),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (_categorySelected != null) {
-                        categoriesSelected.add(_categorySelected!);
-                      }
-                    });
-                  },
-                  child: const Text("Agregar"))
-            ],
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: categoriesSelected.length,
-            itemBuilder: (context, index) {
-              return Container(
-                height: 50,
-                margin: const EdgeInsets.all(2),
-                color: Colors.blue[400],
-                child: Center(
-                    child: Text(
-                  categoriesSelected[index].name,
-                  style: const TextStyle(fontSize: 18),
-                )),
-              );
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _getCategory() {
-    return categories.isEmpty
-        ? const CircularProgressIndicator()
-        : TeamSelect(
-            categories: categories, setCategorySelected: setCategorySelected);
-  }
-
-  setCategorySelected(Category category) {
-    setState(() {
-      _categorySelected = category;
-    });
-  }
-
   Widget _getFormSports() {
     return Column(
       children: <Widget>[
@@ -278,9 +194,5 @@ class _CompetionCreateState extends State<CompetionCreate> {
             title: const Text('2'),
             content: _getFormInformation(),
             isActive: currentStep >= 1),
-        Step(
-            title: const Text('3'),
-            content: _getFormCategory(),
-            isActive: currentStep >= 2)
       ];
 }

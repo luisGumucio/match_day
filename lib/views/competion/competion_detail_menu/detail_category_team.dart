@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:match_day/models/competion.dart';
+import 'package:match_day/views/pages/list_horizontal.dart';
 
 import '../../../models/team.dart';
 import '../../../services/team_service.dart';
-import '../../category/category_list_horizontal.dart';
 import '../../team/team_list.dart';
 
 class DetailCategoryTeam extends StatefulWidget {
@@ -27,9 +27,9 @@ class _DetailCategoryTeamState extends State<DetailCategoryTeam> {
         child: Column(
           children: <Widget>[
             buildAppBar(),
-            CategoryListHorizontal(
-              categories: widget.competion!.categories,
-                onCategorySelected: _handleCategorySelection),
+            ListHorizontal(
+              dataList: widget.competion!.categories,
+                onSelected: _handleCategorySelection),
                       Expanded(
               child: _categoryTeams())
           ],
@@ -43,9 +43,9 @@ class _DetailCategoryTeamState extends State<DetailCategoryTeam> {
         style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold));
   }
 
-  void _handleCategorySelection(String newCategoryId) {
+  void _handleCategorySelection(newCategoryId) {
     setState(() {
-      categoryId = newCategoryId;
+      categoryId = newCategoryId.id;
     });
   }
   Widget _categoryTeams() {

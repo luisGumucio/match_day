@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:match_day/models/grid_layout.dart';
 import 'package:match_day/views/competion/competion_detail_menu/detail_stadings.dart';
+import 'package:match_day/views/competion/competion_detail_menu/detail_competition_category.dart';
 import '../../constant/grid_layout_constant.dart';
 import '../../models/competion.dart';
 import '../pages/grid_option.dart';
@@ -21,12 +22,12 @@ class _CompetionDetailState extends State<CompetionDetail> {
       appBar: AppBar(title: Text(widget.competion.name)),
       body: Column(
         children: <Widget>[
-          ElevatedButton(
+          widget.competion.isStarted? Container() : ElevatedButton(
             onPressed: widget.competion.isStarted
                 ? null
                 : () {
                   },
-            child: Text(widget.competion.isStarted ? 'Publicado' : 'Publicar'),
+            child: const Text('Publicar'),
           ),
           Expanded(
             child: GridView.extent(
@@ -61,6 +62,9 @@ class _CompetionDetailState extends State<CompetionDetail> {
         case "Tabla":
         DetailStadings detailStadings = DetailStadings(competition: competion);
         return detailStadings;
+        case "Categorias":
+        DetailCompetitionCategory competitionCategory = DetailCompetitionCategory(competion: competion);
+        return competitionCategory;
       }
       return Container();
     }
