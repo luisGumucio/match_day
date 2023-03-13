@@ -1,22 +1,30 @@
 import 'package:match_day/models/competion.dart';
+import 'package:match_day/models/match.dart';
+
 import 'package:pocketbase/pocketbase.dart';
 
 import 'category.dart';
 
 class Fixture {
   String? id;
-  final String place;
+  final int nroRecord;
   final DateTime date;
-  final String scoreId;
+  List<Match>? matches;
   Category? category;
   Competion? competion;
 
-  Fixture({this.id, required this.place, required this.date, required this.scoreId,
+  Fixture({this.id,
+  required this.nroRecord,
+  required this.date,
+  this.matches,
   this.category, this.competion});
 
   factory Fixture.fromJson(RecordModel item) {
-    return Fixture(place: item.data['place'], date: DateTime.parse(item.data['date']), scoreId: '', id:item.id);
-    //  Fixture(place: item.data['place'], date: DateTime.parse(item.data['date']), scoreId: '')
+    return Fixture(
+    nroRecord: int.parse(item.data['nroRecord']),
+    date: DateTime.parse(item.data['date']),
+    matches: Match.getMatches(item.expand['matches(fixture)']),
+    id:item.id);
   }
 
 }

@@ -7,6 +7,7 @@ import '../../models/competion.dart';
 import '../../models/fixture.dart';
 import '../../models/soccert_match.dart';
 import '../competion/competion_list_horizontal.dart';
+import '../fixture/fixture_list_horizontal.dart';
 import '../pages/tag.dart';
 
 class MatchsHome extends StatefulWidget {
@@ -21,13 +22,14 @@ class _MatchsHomeState extends State<MatchsHome> {
   Competion compention =
       Competion('', '', DateTime.now(), DateTime.now(), false);
   List<Fixture> fixtures = [];
+  Fixture? _fixture;
   FixtureService fixtureService = FixtureService();
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             tagTitle('Competiciones'),
@@ -60,14 +62,17 @@ class _MatchsHomeState extends State<MatchsHome> {
       categoryId = newCategoryId.id;
       fixtureService.getAllFixture(categoryId, compention.id!).then((value) {
         setState(() {
-          fixtures = fixtures;
+          fixtures = value;
         });
       });
     });
   }
 
   void _handleFixtueSelection(data) {
+    setState(() {
+      _fixture = data;
 
+    });
   }
 
   Widget _displayCategory() {
@@ -79,7 +84,7 @@ class _MatchsHomeState extends State<MatchsHome> {
   }
   Widget _displayFixture() {
     return categoryId == '' ? const Center(child: Text("No hay Fixture"))
-    : ListHorizontal(dataList: [], onSelected: _handleFixtueSelection);
+    : FixtureListHorizontal(fixtures: fixtures, onSelected: _handleFixtueSelection);
   }
 
   Widget matchTile(SoccerMatch match) {

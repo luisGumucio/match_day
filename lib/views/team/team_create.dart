@@ -149,10 +149,10 @@ class _TeamCreateState extends State<TeamCreate> {
       _globalkey.currentState!.save();
       pictureService.addPicture(_photo!).then((value) async {
         Category category = _categorySelected;
-        Team team = Team(
-          "",
+        Team team = Team( 
           name: _name.text,
           urlLogo: value.url,
+          id: "",
         );
         team.category = category;
         await teamService.addTeam(team);
